@@ -1,27 +1,13 @@
-{% load staticfiles %}
-<html>
-    <head>
-        <title>El blog de Jusseppe</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-    </head>
-    <body>
-        <div>
-            <h1><a href="/">Bienvenidos</a></h1>
-        </div>
+{% extends 'blog/base.html' %}
 
-        {% for post in posts %}
-            <div>
+{% block content %}    
+    {% for post in posts %}
+        <div class="post">
+            <div class="dste">
                 <p>published: {{ post.published_date }}</p>
-                <h1><a href="">{{ post.title }}</a></h1>
-                <p>{{ post.text|linebreaksbr }}</p>
             </div>
-        {% endfor %}
-
-        <div>
-            <p>Hola a todos, mi nombre es Alvaro Jusseppe Cespedes Gonzalez y soy nuevo en el area de la programacion!
+            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaksbr }}</p>
         </div>
-    </body>
-</html>
-        
+    {% endfor %}
+{% endblock %}
